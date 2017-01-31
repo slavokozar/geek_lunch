@@ -46,6 +46,30 @@
       font-weight: 700 !important;
     }
 
+    #loader{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      background: rgba(0,0,0,.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 2s;
+      -webkit-transition: all 2s;
+    }
+
+    #loader-inner{
+      background:#fff;
+      width:33%;
+      padding:20px;
+    }
+    
+    #loader-inner i{
+      display:block;
+      margin:20px auto 0 auto;
+    }
 
   </style>
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -119,6 +143,13 @@
 
     </div> <!-- /container -->
 
+    <div id="loader" class="hidden">
+      <div id="loader-inner" class="text-center">
+        <img src="img/zomato-developers-logo.png" alt="ZOMATO Developers logo"/>
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        <p>loading restaurants...</p>
+      </div>  
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -135,6 +166,9 @@
           lng: 19.1
         }
 
+        var markers = null;
+        var infowindows = null;
+        var zomato_api_key = '646ac76bfb0a0b34cc96f87d788de5fd';
         var html_location = false; 
         var ipinfo_location = false;
 
@@ -148,11 +182,8 @@
 
         $.ajax({
           url: 'https://ipinfo.io',
-              // The name of the callback parameter, as specified by the YQL service
-        jsonp: "callback",
- 
-        // Tell jQuery we're expecting JSONP
-        dataType: "jsonp"
+          jsonp: "callback",
+          dataType: "jsonp"
         }).done(function(response){
           ipinfo_location = true;
           
@@ -168,6 +199,7 @@
             '<p class="text-strong">'+response.loc+'</p>';
 
           $('#ipinfo-loader').after(content).remove();
+          zomatoSearch(parseFloat(loc[0]), parseFloat(loc[1]), 1000);
         }).error(function(error){
           ipinfo_location = false;
           console.log(error);
@@ -184,11 +216,12 @@
     }
 
     function showPosition(position) {
-        var content = '<p class="text-strong">' + position.coords.latitude + ', ' + position.coords.longitude + '</p>'; 
+        var content = '<p>html5 geolocation</p><p class="text-strong">' + position.coords.latitude + ', ' + position.coords.longitude + '</p>'; 
 
         $('#html5-loader').after(content).remove();
 
         refresh(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
+        zomatoSearch(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude),1000);
     }
 
     function showError(error) {
@@ -217,11 +250,96 @@
       map.setCenter(pt);
       map.setZoom(14);
 
+
     }
+
+    function zomatoSearch(lat, lon, radius){
+      $('#loader').removeClass('hidden');
+      $.ajax({
+          url: 'https://developers.zomato.com/api/v2.1/search?lat='+lat+'&lon='+lon+'&radius='+radius+'&sort=real_distance&order=asc',
+          headers: {
+            'user-key':'646ac76bfb0a0b34cc96f87d788de5fd'
+          }
+        }).done(function(response) {
+          $('#loader').addClass('hidden');
+          markers = [];
+          infowindows = [];
+          for(var i in response.restaurants){
+            console.log(response.restaurants[i].restaurant);
+
+            // var id = response.restaurants[i].R.res_id;
+            var name = response.restaurants[i].restaurant.name;
+            var thumb = response.restaurants[i].restaurant.thumb;
+            var url = response.restaurants[i].restaurant.url;
+            var address = response.restaurants[i].restaurant.location.address;
+            var lat = response.restaurants[i].restaurant.location.latitude;
+            var lon = response.restaurants[i].restaurant.location.longitude;
+            var rating = false;
+
+            if(parseInt(response.restaurants[i].restaurant.user_rating.votes) > 0){
+              rating = parseInt(response.restaurants[i].restaurant.user_rating.aggregate_rating);
+            }
+            if(rating === false){
+              var rate = 'This restaurant has not been rated yet.'
+            }else{
+              var rate = 'Restaurant rating: '+rating;  
+            }
+            
+
+            var contentString = 
+              '<div id="content">'+
+              '<div style="width:20%;float:left">'+
+              '<img style="width:100%" src="'+thumb+'" alt="'+name+'"/>'+
+              '</div>'+
+              '<div style="width:80%;float:left">'+
+              '<h2>'+name+'</h2>'+
+              address+'<br/>'+
+              rate+'<br/>'+
+              '<a href="'+url+'" target="_blank">Zomato page</a>'+
+              '</div>'+
+              '</div>';
+
+               
+
+            markers[i] = new google.maps.Marker({
+              position: {lat: parseFloat(lat), lng: parseFloat(lon)},
+              map: map,
+              title: name
+            });
+
+            infowindows[i] = new google.maps.InfoWindow({
+              content: contentString
+            });
+
+            google.maps.event.addListener(markers[i], 'click', function(j) {
+              return function() {
+                  for(var i = 0; i < infowindows.length; i++){
+                    infowindows[i].close(map);
+                  }
+                  infowindows[j].open(map, markers[j]);
+              }
+            }(i));
+            
+            
+          }
+          
+        }).error(function(error){
+          ipinfo_location = false;
+          console.log(error.responseText);
+        })
+
+
+      
+
+
+      // https://developers.zomato.com/api/v2.1/search?lat=50.0833&lon=14.4667&radius=10000
+
+    }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3dP_cd0qQMV9sHz0_aqNiVQzRK60sX6w&callback=initMap">
     </script>
 
 
-</body></html>
+</body></html>  
