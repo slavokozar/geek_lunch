@@ -93,18 +93,23 @@
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>  
             <div class="col-lg-6">
-              <div class="col-lg-6 text-center">
-                <img class="img-logo" src="img/html5.png" alt="HTML 5 Logo"/>
-                <div id="html5-loader">
-                  <p>HTML 5 locating...</p>
-                  <i id="html5-loader" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <h3>geolocation</h3>
                 </div>
-              </div>
-              <div class="col-lg-6 text-center">
-                <img class="img-logo" src="img/ipinfo_io.png" alt="ipinfo.io Logo"/>
-                <div id="ipinfo-loader">
-                  <p>ipinfo.io locating...</p>
-                  <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                <div class="col-lg-6 text-center">
+                  <img class="img-logo" src="img/html5.png" alt="HTML 5 Logo"/>
+                  <div id="html5-loader">
+                    <p>HTML 5 locating...</p>
+                    <i id="html5-loader" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                  </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                  <img class="img-logo" src="img/ipinfo_io.png" alt="ipinfo.io Logo"/>
+                  <div id="ipinfo-loader">
+                    <p>ipinfo.io locating...</p>
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                  </div>
                 </div>
               </div>
             </div>
@@ -125,17 +130,19 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
+        var position = {
+          lat: 49.5,
+          lng: 19.1
+        }
+
+        var html_location = false; 
+        var ipinfo_location = false;
+
+        var map = null;
         function initMap() {
-          var uluru = {lat: -25.363, lng: 131.044};
-
-          var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-          });
-
-          var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: position
           });
         }
 
@@ -147,15 +154,22 @@
         // Tell jQuery we're expecting JSONP
         dataType: "jsonp"
         }).done(function(response){
-
+          ipinfo_location = true;
+          if(!html_location){
+            loc = response.loc.split(',');
+            position.lat = parseFloat(loc[0]);
+            position.lon = parseFloat(loc[1]);
+            map.setCenter(position);
+          }
           content = 
             '<p>ipinfo.io location</p>'+
-            '<p class="text-strong">'+response.ip+'</p>'+ 
+            '<p>'+response.ip+'</p>'+ 
             '<p>'+response.city+', '+response.country+'</p>'+
-            '<p>'+response.loc+'</p>';
+            '<p class="text-strong">'+response.loc+'</p>';
 
           $('#ipinfo-loader').after(content).remove();
         }).error(function(error){
+          ipinfo_location = false;
           console.log(error);
         })
 
@@ -164,13 +178,13 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition,showError);
         } else {
-          var content = "<p>HTML5 Geolocation is not supported by your browser.</p>";
+          var content = '<p>html5 location</p>'+'<p class="text-strong">HTML5 Geolocation is not supported by your browser.</p>';
           $('#html5-loader').after(content).remove();
         }
     }
 
     function showPosition(position) {
-        var content = '<p>' + position.coords.latitude + ', ' + position.coords.longitude + '<p>'; 
+        var content = '<p class="text-strong">' + position.coords.latitude + ', ' + position.coords.longitude + '</p>'; 
         $('#html5-loader').after(content).remove();
     }
 
