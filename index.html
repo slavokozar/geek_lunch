@@ -155,12 +155,12 @@
         dataType: "jsonp"
         }).done(function(response){
           ipinfo_location = true;
+          
           if(!html_location){
             loc = response.loc.split(',');
-            position.lat = parseFloat(loc[0]);
-            position.lon = parseFloat(loc[1]);
-            map.setCenter(position);
+            refresh(parseFloat(loc[0]), parseFloat(loc[1]));
           }
+
           content = 
             '<p>ipinfo.io location</p>'+
             '<p>'+response.ip+'</p>'+ 
@@ -185,7 +185,10 @@
 
     function showPosition(position) {
         var content = '<p class="text-strong">' + position.coords.latitude + ', ' + position.coords.longitude + '</p>'; 
+
         $('#html5-loader').after(content).remove();
+
+        refresh(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
     }
 
     function showError(error) {
@@ -209,6 +212,12 @@
         $('#html5-loader').after(content).remove();
     }
 
+    function refresh(lat, lon){
+      var pt = new google.maps.LatLng(lat, lon);
+      map.setCenter(pt);
+      map.setZoom(14);
+
+    }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3dP_cd0qQMV9sHz0_aqNiVQzRK60sX6w&callback=initMap">
