@@ -48,10 +48,6 @@
 
     #loader{
       position:absolute;
-      top:0;
-      bottom:0;
-      left:0;
-      right:0;
       background: rgba(0,0,0,.7);
       display: flex;
       align-items: center;
@@ -63,12 +59,16 @@
     #loader-inner{
       background:#fff;
       width:33%;
-      padding:20px;
+      padding:10px;
+    }
+
+    #loader-inner img{
+      height:50px;
     }
     
     #loader-inner i{
       display:block;
-      margin:20px auto 0 auto;
+      margin:10px auto 0 auto;
     }
 
   </style>
@@ -254,8 +254,17 @@
     }
 
     function zomatoSearch(lat, lon, radius){
+      var $map = $('#map');
       
+      $('#loader').css({
+        'left': $map.offset().left,
+        'top': $map.offset().top,
+        'width': $map.outerWidth(),
+        'height': $map.outerHeight(),
+      })
       $('#loader').removeClass('hidden');
+
+
       $.ajax({
           url: 'https://developers.zomato.com/api/v2.1/search?lat='+lat+'&lon='+lon+'&radius='+radius+'&sort=real_distance&order=asc',
           headers: {
