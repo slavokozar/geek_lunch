@@ -254,6 +254,7 @@
     }
 
     function zomatoSearch(lat, lon, radius){
+      
       $('#loader').removeClass('hidden');
       $.ajax({
           url: 'https://developers.zomato.com/api/v2.1/search?lat='+lat+'&lon='+lon+'&radius='+radius+'&sort=real_distance&order=asc',
@@ -262,7 +263,12 @@
           }
         }).done(function(response) {
           $('#loader').addClass('hidden');
+          if(markers!=null){
+            setMapMarkers(null);  
+          }
+          
           markers = [];
+
           infowindows = [];
           for(var i in response.restaurants){
             console.log(response.restaurants[i].restaurant);
@@ -329,11 +335,19 @@
         })
 
 
+
+
       
 
 
       // https://developers.zomato.com/api/v2.1/search?lat=50.0833&lon=14.4667&radius=10000
 
+    }
+
+    function setMapMarkers(map) {
+      for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+      }
     }
 
     </script>
