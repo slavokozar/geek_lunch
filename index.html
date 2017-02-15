@@ -85,44 +85,38 @@
   <body>
 
     <div class="container">
-
       <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">GeekLUNCH</a>
-              </div>
-              <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#home">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#documentation">Documentation</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-              </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
-    </nav>
+      <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">GeekLUNCH</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="active"><a href="#home">Home <span class="sr-only">(current)</span></a></li>
+                      <!-- <li><a href="#documentation">Documentation</a></li> -->
+                      <li><a href="#contact">Contact</a></li>
+                  </ul>
+                </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+      </nav>
 
-<<<<<<< HEAD
-      <p>
-        This is a mashup application combinig various APIs in order to create serve you information about lunch menus around your position. Your position is gained from your IP address.
-      </p>
-
-      <p>
-        G33kLunch is semestral project on the internet application development course at CTU in Prague.
-      </p>
-=======
-    <div id="map"></div>
+      <section id="home">
+        <div id="map"></div>
         <div class="jumbotron">
           <div class="row">
             <div class="col-lg-6">
               <h1>GeekLUNCH</h1>    
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <p>No more googling place to eat!</p>
+              <p>GeekLUNCH will show you all places to eat in 1km distance from your current position. Application uses two ways of position detection. IPinfo.io provides your position from information about your public IP address. Application also gains your position using HTML5 Geocoding, if your browser supports this function. Position from Geocoding is in general more accurate, so in case both of this ways are availabe, application uses position gained using HTML5 Geolocation. </p>
+              <p>All you have to do right now, is to chcek places displayed on map!</p>
+
             </div>  
             <div class="col-lg-6">
               <div class="row">
@@ -147,10 +141,14 @@
             </div>
           </div>
         </div>
+      </section>
       
-
+      <section id="contact">
+        <h2>Kontakt</h2>
+        <p>slavo.kozar@gmail.com</p>
+        <p>github.com/slavokozar</p>
+      </section>
     </div> <!-- /container -->
->>>>>>> 56df455a67069f02c18cae4e2ab1b05aae76f04b
 
     <div id="loader" class="hidden">
       <div id="loader-inner" class="text-center">
