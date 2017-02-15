@@ -1,26 +1,114 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>G33kLunch by slavokozar</title>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GeekLUNCH</title>
+
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+  <style>
+    body {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar {
+        margin-bottom: 10px;
+    }
+
+    #map{
+      width:100%;
+      height:50vh;
+    }
+
+    .jumbotron {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-top: 10px;
+        color: inherit;
+        background-color: #eee;
+        border-radius:0px !important;
+    }
+
+    .img-logo{
+      height:80px;
+      margin:10px 0;
+    }
+
+    .text-strong{
+      font-weight: 700 !important;
+    }
+
+    #loader{
+      position:absolute;
+      background: rgba(0,0,0,.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 2s;
+      -webkit-transition: all 2s;
+    }
+
+    #loader-inner{
+      background:#fff;
+      width:33%;
+      padding:10px;
+    }
+
+    #loader-inner img{
+      height:50px;
+    }
+
+    #loader-inner i{
+      display:block;
+      margin:10px auto 0 auto;
+    }
+
+  </style>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
+
   <body>
-    <section class="page-header">
-      <h1 class="project-name">G33kLunch</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.com/slavokozar/geek_lunch" class="btn">View on GitHub</a>
-      <a href="https://github.com/slavokozar/geek_lunch/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/slavokozar/geek_lunch/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
 
-    <section class="main-content">
+    <div class="container">
 
+      <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">GeekLUNCH</a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#home">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#documentation">Documentation</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+              </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+    </nav>
 
+<<<<<<< HEAD
       <p>
         This is a mashup application combinig various APIs in order to create serve you information about lunch menus around your position. Your position is gained from your IP address.
       </p>
@@ -28,15 +116,262 @@
       <p>
         G33kLunch is semestral project on the internet application development course at CTU in Prague.
       </p>
+=======
+    <div id="map"></div>
+        <div class="jumbotron">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1>GeekLUNCH</h1>    
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>  
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <h3>geolocation</h3>
+                </div>
+                <div class="col-lg-6 text-center">
+                  <img class="img-logo" src="img/html5.png" alt="HTML 5 Logo"/>
+                  <div id="html5-loader">
+                    <p>HTML 5 locating...</p>
+                    <i id="html5-loader" class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                  </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                  <img class="img-logo" src="img/ipinfo_io.png" alt="ipinfo.io Logo"/>
+                  <div id="ipinfo-loader">
+                    <p>ipinfo.io locating...</p>
+                    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/slavokozar/geek_lunch">G33kLunch</a> is maintained by <a href="https://github.com/slavokozar">slavokozar</a>.</span>
+    </div> <!-- /container -->
+>>>>>>> 56df455a67069f02c18cae4e2ab1b05aae76f04b
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+    <div id="loader" class="hidden">
+      <div id="loader-inner" class="text-center">
+        <img src="img/zomato-developers-logo.png" alt="ZOMATO Developers logo"/>
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        <p>loading restaurants...</p>
+      </div>  
+    </div>
 
-    </section>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  
-  </body>
-</html>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        var position = {
+          lat: 49.5,
+          lng: 19.1
+        }
+
+        var markers = null;
+        var infowindows = null;
+        var zomato_api_key = '646ac76bfb0a0b34cc96f87d788de5fd';
+        var html_location = false; 
+        var ipinfo_location = false;
+
+        var map = null;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: position
+          });
+        }
+
+        $.ajax({
+          url: 'https://ipinfo.io',
+          jsonp: "callback",
+          dataType: "jsonp"
+        }).done(function(response){
+          ipinfo_location = true;
+          
+          if(!html_location){
+            loc = response.loc.split(',');
+            refresh(parseFloat(loc[0]), parseFloat(loc[1]));
+          }
+
+          content = 
+            '<p>ipinfo.io location</p>'+
+            '<p>'+response.ip+'</p>'+ 
+            '<p>'+response.city+', '+response.country+'</p>'+
+            '<p class="text-strong">'+response.loc+'</p>';
+
+          $('#ipinfo-loader').after(content).remove();
+          zomatoSearch(parseFloat(loc[0]), parseFloat(loc[1]), 1000);
+        }).error(function(error){
+          ipinfo_location = false;
+          console.log(error);
+        })
+
+    getLocation();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+        } else {
+          var content = '<p>html5 location</p>'+'<p class="text-strong">HTML5 Geolocation is not supported by your browser.</p>';
+          $('#html5-loader').after(content).remove();
+        }
+    }
+
+    function showPosition(position) {
+        var content = '<p>html5 geolocation</p><p class="text-strong">' + position.coords.latitude + ', ' + position.coords.longitude + '</p>'; 
+
+        $('#html5-loader').after(content).remove();
+
+        refresh(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
+        zomatoSearch(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude),1000);
+    }
+
+    function showError(error) {
+      var content = "";
+
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                content = "<p>User denied the request for Geolocation.</p>";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                content = "<p>Location information is unavailable.</p>";
+                break;
+            case error.TIMEOUT:
+                content = "<p>The request to get user location timed out.</p>";
+                break;
+            case error.UNKNOWN_ERROR:
+                content = "<p>An unknown error occurred.</p>";
+                break;
+        }
+
+        $('#html5-loader').after(content).remove();
+    }
+
+    function refresh(lat, lon){
+      var pt = new google.maps.LatLng(lat, lon);
+      map.setCenter(pt);
+      map.setZoom(14);
+
+
+    }
+
+    function zomatoSearch(lat, lon, radius){
+      var $map = $('#map');
+      
+      $('#loader').css({
+        'left': $map.offset().left,
+        'top': $map.offset().top,
+        'width': $map.outerWidth(),
+        'height': $map.outerHeight(),
+      })
+      $('#loader').removeClass('hidden');
+
+
+      $.ajax({
+          url: 'https://developers.zomato.com/api/v2.1/search?lat='+lat+'&lon='+lon+'&radius='+radius+'&sort=real_distance&order=asc',
+          headers: {
+            'user-key':'646ac76bfb0a0b34cc96f87d788de5fd'
+          }
+        }).done(function(response) {
+          $('#loader').addClass('hidden');
+          if(markers!=null){
+            setMapMarkers(null);  
+          }
+          
+          markers = [];
+
+          infowindows = [];
+          for(var i in response.restaurants){
+            console.log(response.restaurants[i].restaurant);
+
+            // var id = response.restaurants[i].R.res_id;
+            var name = response.restaurants[i].restaurant.name;
+            var thumb = response.restaurants[i].restaurant.thumb;
+            var url = response.restaurants[i].restaurant.url;
+            var address = response.restaurants[i].restaurant.location.address;
+            var lat = response.restaurants[i].restaurant.location.latitude;
+            var lon = response.restaurants[i].restaurant.location.longitude;
+            var rating = false;
+
+            if(parseInt(response.restaurants[i].restaurant.user_rating.votes) > 0){
+              rating = parseInt(response.restaurants[i].restaurant.user_rating.aggregate_rating);
+            }
+            if(rating === false){
+              var rate = 'This restaurant has not been rated yet.'
+            }else{
+              var rate = 'Restaurant rating: '+rating;  
+            }
+            
+
+            var contentString = 
+              '<div id="content">'+
+              '<div style="width:20%;float:left">'+
+              '<img style="width:100%" src="'+thumb+'" alt="'+name+'"/>'+
+              '</div>'+
+              '<div style="width:80%;float:left">'+
+              '<h2>'+name+'</h2>'+
+              address+'<br/>'+
+              rate+'<br/>'+
+              '<a href="'+url+'" target="_blank">Zomato page</a>'+
+              '</div>'+
+              '</div>';
+
+               
+
+            markers[i] = new google.maps.Marker({
+              position: {lat: parseFloat(lat), lng: parseFloat(lon)},
+              map: map,
+              title: name
+            });
+
+            infowindows[i] = new google.maps.InfoWindow({
+              content: contentString
+            });
+
+            google.maps.event.addListener(markers[i], 'click', function(j) {
+              return function() {
+                  for(var i = 0; i < infowindows.length; i++){
+                    infowindows[i].close(map);
+                  }
+                  infowindows[j].open(map, markers[j]);
+              }
+            }(i));
+            
+            
+          }
+          
+        }).error(function(error){
+          ipinfo_location = false;
+          console.log(error.responseText);
+        })
+
+
+
+
+      
+
+
+      // https://developers.zomato.com/api/v2.1/search?lat=50.0833&lon=14.4667&radius=10000
+
+    }
+
+    function setMapMarkers(map) {
+      for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+      }
+    }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3dP_cd0qQMV9sHz0_aqNiVQzRK60sX6w&callback=initMap">
+    </script>
+
+
+</body></html>  
